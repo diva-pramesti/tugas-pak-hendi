@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INPUT DATA KE SPREAD SHEET</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        padding: 1em;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        color: #000000;
+        background-color: #e3e3e3;
+      }
+
+      h4 {
+        color: #f0a500;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 1em;
+        line-height: 1.4;
+        background-color: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        transition: 0.35s ease-in-out;
+        transition: all 0.35s ease-in-out;
+      }
+
+      input:focus {
+        outline: 0;
+        border-color: #bd8200;
+      }
+
+      input:focus + .input-icon i {
+        color: #f0a500;
+      }
+
+      input:focus + .input-icon:after {
+        border-right-color: #f0a500;
+      }
+
+      select {
+        height: 3.4em;
+        width: 100%;
+      }
+
+      select:focus,
+      select:active {
+        outline: 0;
+      }
+
+      .input-group {
+        margin-bottom: 1em;
+      }
+
+      .input-group:before,
+      .input-group:after {
+        content: "";
+        display: table;
+      }
+
+      .input-group:after {
+        clear: both;
+      }
+
+      .input-group-icon input {
+        padding-left: 4.4em;
+      }
+
+      .input-group-icon .input-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3.4em;
+        height: 3.4em;
+        line-height: 3.4em;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .input-group-icon .input-icon:after {
+        position: absolute;
+        top: 0.6em;
+        bottom: 0.6em;
+        left: 3.4em;
+        display: block;
+        border-right: 1px solid #e5e5e5;
+        content: "";
+        transition: 0.35s ease-in-out;
+        transition: all 0.35s ease-in-out;
+      }
+
+      .container {
+        max-width: 38em;
+        padding: 1em 3em 2em 3em;
+        margin: 0em auto;
+        background-color: #fff;
+        border-radius: 4.2px;
+        box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+      }
+
+      .row:before,
+      .row:after {
+        content: "";
+        display: table;
+      }
+
+      .row:after {
+        clear: both;
+      }
+
+      .col-half {
+        padding-right: 10px;
+        float: left;
+        width: 50%;
+      }
+
+      .col-half:last-of-type {
+        padding-right: 0;
+      }
+
+      .jenis {
+        margin-top: 5px;
+      }
+
+      @media only screen and (max-width: 540px) {
+        .col-half {
+          width: 100%;
+          padding-right: 0;
+        }
+      }
+      .submit {
+        background-color: #f0a500;
+        width: 50%;
+        margin-left: 25%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="form-container" class="container">
+      <form
+        action="https://script.google.com/macros/s/AKfycbwXJLupsH_5Bm7QsECMX6FEuOhdONajgjdYigf1QT6d3uaU9-X9SmIFHwVrDyoGFVXntw/exec"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="row">
+          <h4>INPUT DATA KE SPREAD SHEET</h4>
+          <label for="no" class="input-group">Nomor</label>
+          <input type="number" id="no" name="no" required />
+          <br /><br />
+          <label for="nama">Nama Kegiatan:</label>
+          <input type="text" id="nama" name="nama" required />
+          <br /><br />
+          <label for="jenis" class="jenis">Pilih Jenis Kegiatan:</label>
+          <select name="jenis" class="jenis" required>
+            <option></option>
+            <option value="kbm">KBM</option>
+            <option value="nonkbm">Non KBM</option>
+          </select>
+          <br /><br />
+          <label for="tgl_kgt">Tanggal kegiatan:</label>
+          <input type="date" id="tgl_kgt" name="tgl_kgt" required />
+          <br /><br />
+          <label for="uraian">Uraian Kegiatan:</label>
+          <br />
+          <textarea
+            cols="60"
+            rows="10"
+            type="text"
+            id="uraian"
+            name="uraian"
+            required
+          ></textarea
+          ><br /><br /><br />
+          <label for="target">Target Capaian:</label>
+          <textarea
+            cols="60"
+            rows="10"
+            type="text"
+            id="target"
+            name="target"
+            required
+          ></textarea
+          ><br /><br />
+          <label for="buktis">Bukti Kegiatan:</label>
+          <input type="file" name="buktis" id="buktis" />
+          <input type="hidden" id="buktisEnc" name="buktisEnc" />
+          <button type="button" id="kameraButton">
+            Ambil Foto Dari Kamera
+          </button>
+        </div>
+        <script>
+          document
+            .getElementById("buktis")
+            .addEventListener("change", function (event) {
+              var file = event.target.files[0];
+              var reader = new FileReader();
+              reader.onloadend = function () {
+                document.getElementById("buktisEnc").value =
+                  reader.result.split(",")[1];
+              };
+              reader.readAsDataURL(file);
+            });
+
+          document
+            .getElementById("kameraButton")
+            .addEventListener("click", function () {
+              document.getElementById("buktis").click();
+            });
+        </script>
+        <br />
+        <input type="submit" value="Simpan Data" class="submit" />
+      </form>
+    </div>
+  </body>
+</html>
